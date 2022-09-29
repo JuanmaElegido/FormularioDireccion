@@ -23,15 +23,19 @@ public class ServletForm extends HttpServlet {
 		String provincia = peticion.getParameter("provincia");
 		String verificar = peticion.getParameter("verificar");
 		String enviar = peticion.getParameter("enviar");
+		boolean valido = false;
 		
-		if (enviar!=null) {
-			System.out.print(enviar);
+		if (calle !="" && numero !="" && ciudad !="" && provincia !="") {
+			valido = true;
+		}
+		
+		
+		if (enviar!=null && valido) {
 			RequestDispatcher rqd = peticion.getRequestDispatcher("/jsp/resumenDatos.jsp");
 			rqd.forward(peticion, respuesta);
 			
 		} 
-		if (verificar!=null){
-			System.out.print(verificar);
+		if (verificar!=null || !valido){
 			RequestDispatcher rqd = peticion.getRequestDispatcher("/jsp/formulario.jsp");
 			rqd.forward(peticion, respuesta);
 		}
